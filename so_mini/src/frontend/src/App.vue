@@ -1,23 +1,18 @@
 <template>
   <div id="app">
-    <login></login>
-    <headerContent></headerContent>
   </div>
 </template>
 
 <script>
-  import login from "./components/login";
-  import headerContent from "./components/header-content";
   export default {
     name: 'app',
     data () {
       return {
-        msg: 'Welcome to Your Vue.js App'
+       
       }
     },
     components : {
-      'login' : login,
-      'headerContent' : headerContent,
+
     }
   }
 </script>
