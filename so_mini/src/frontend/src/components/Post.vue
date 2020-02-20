@@ -24,15 +24,29 @@
                :src="post.postImage"/>
         </div>
         <div class="content__likes">
-          <i class="far fa-heart fa-lg"
-             :class="{'fas': this.post.hasBeenLiked}"
+          <i class="heart icon large"
+             :class="{'red' : this.post.hasBeenLiked}"
              @click="like">
+          </i> &nbsp
+          <i class="comment outline icon large"
+             v-html="index">
           </i>
-          <p class="likes">{{post.likes}}</p>
+          <p class="likes">{{post.likes}}명이 좋아합니다.</p>
           <p class="caption">
-            <span>{{post.userName}}</span>
+            <span><b>{{post.userName}}</b></span>
             {{post.caption}}
           </p>
+        </div>
+        <div class="content__comments">
+          <div v-if="post.comments.length>0"
+               style="color:#999">
+            <b>댓글{{post.comments.length}}개보기</b>
+          </div>
+          <div v-if="post.comments.length>0">
+            <comment
+              :comments="post.comments">
+            </comment>
+          </div>
         </div>
       </div>
     </div>
@@ -41,10 +55,16 @@
 </template>
 
 <script>
+
+  import Comment from "./Comment";
+
   export default {
     name: "Post",
     props: {
       post : Object
+    },
+    components : {
+      "Comment" : Comment,
     },
     methods: {
       like() {
@@ -93,31 +113,33 @@
   .header__button {
     flex : 1 1 auto;
   }
-  .content__image--size {
-    width : 614px;
-    height : 500px;
+  .content {
     text-align : left !important;
+  }
+  .content__image--size {
+    width : 620px;
+    height : 500px;
     margin-top : 10px;
     margin-bottom: 10px;
   }
 
-  .far.fa-heart,
-  .fas.fa-heart {
-    cursor: pointer;
+  .content__likes {
+    padding-left : 1rem;
+    padding-bottom : 1rem;
   }
-
-  .fas.fa-heart {
-    color: #f06595;
+  .content__comments {
+    padding-left : 1rem;
+    padding-bottom : 1rem;
   }
 
   .likes {
     margin: 5px 0;
     margin-bottom: 5px !important;
-    font-size: 0.85rem;
+    /*font-size: 0.85rem;*/
     font-weight: bold;
   }
 
   .caption {
-    font-size: 0.85rem;
+    /*font-size: 0.85rem;*/
   }
 </style>
