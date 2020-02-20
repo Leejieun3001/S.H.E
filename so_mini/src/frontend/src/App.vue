@@ -1,18 +1,23 @@
 <template>
   <div id="app">
+    <TimelinePage
+      :posts="posts"/>
   </div>
 </template>
 
 <script>
+  import posts from "./data/posts";
+  import TimelinePage from "./views/TimelinePage"
+
   export default {
     name: 'app',
     data () {
       return {
-       
+        posts,
       }
     },
     components : {
-
+      "TimelinePage" : TimelinePage,
     }
   }
 </script>
