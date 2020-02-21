@@ -50,16 +50,41 @@
         </div>
       </div>
     </div>
-    <div class="footer"></div>
+    <div class="footer">
+      <div class="footer__input">
+        <sui-form>
+          <sui-form-field>
+            <textarea
+              placeholder="댓글 달기.."
+              rows="1"
+              type="text"
+              v-model="newComment"
+              v-on:keyup.enter="addComment"
+            >
+            </textarea>
+          </sui-form-field>
+        </sui-form>
+      </div>
+      <div class="footer__submit">
+        <sui-button type="submit"
+                    color="blue"
+                    v-on:click="addComment">게시
+        </sui-button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-
   import Comment from "./Comment";
 
   export default {
     name: "Post",
+    data() {
+      return {
+        newComment:''
+      }
+    },
     props: {
       post : Object
     },
@@ -73,6 +98,16 @@
       },
       isClicked() {
         alert("팔로우를 정말 취소하시겠습니까?");
+      },
+      addComment() {
+        if(this.newComment !== "") {
+          let value = this.newComment && this.newComment.trim();
+          // 댓글을 갱신하는 작업 필요
+          this.clearInput();
+        }
+      },
+      clearInput() {
+        this.newComment='';
       }
     }
   };
@@ -84,6 +119,7 @@
     margin : 0 auto;
     /*position : relative;*/
     /*background : #000;*/
+
   }
 
   .header {
@@ -138,7 +174,19 @@
     /*font-size: 0.85rem;*/
     font-weight: bold;
   }
-
+  .footer {
+    display : flex;
+    flex-direction : row;
+    padding-left : 1rem;
+    padding-right : 1rem;
+    margin-bottom : 4rem;
+  }
+  .footer__input {
+    flex : 8 8 auto;
+  }
+  .footer__submit {
+    flex : 1 1 auto;
+  }
   .caption {
     /*font-size: 0.85rem;*/
   }
