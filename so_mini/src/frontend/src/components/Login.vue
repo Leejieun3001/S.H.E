@@ -2,42 +2,63 @@
   <div class="container">
     <h1 id="name">SO._.MINI</h1>
     <div class="position-changed">
-      <sui-input class="form-type" placeholder="사용자이름 또는 이메일"/>
+      <sui-input class="form-type"
+                 type="text"
+                 placeholder="사용자이름 또는 이메일"
+                 v-model="userId"/>
     </div>
     <div></div>
     <div class="position-changed">
-      <sui-input class="form-type" placeholder="비밀번호"/>
+      <sui-input class="form-type"
+                 type="password"
+                 placeholder="비밀번호"
+                 v-model="password"/>
     </div>
     <div>
-      <sui-button class="login" primary>로그인</sui-button>
-    </div>
-    <div class="position-changed">
-      <hr> 또는 <hr>
+      <sui-button class="login"
+                  :class="{primary : isAbledLogin}">로그인
+      </sui-button>
     </div>
     <div class="sns-login main-color" style="margin-top : 1rem;">
       <div class="sns-login-detail">
-        <img class="kakao-login" src="../assets/kakao_logo.png" align="center"/>
-        <b>kakao로 로그인</b>
+        <sui-button class="login" color="yellow">
+          <img class="kakao-login" src="../assets/kakao_logo.png" align="center"/>
+          <b>kakao로 로그인</b>
+        </sui-button>
       </div>
     </div>
     <div class="sns-login main-color">
       <div class="sns-login-detail">
-        <img class="google-login" src="../assets/google_logo.png" align="top"/>
-        <b>google로 로그인</b>
+        <sui-button class="login" color="green">
+          <img class="google-login" src="../assets/google_logo.png" align="top"/>
+          <b>google로 로그인</b>
+        </sui-button>
       </div>
     </div>
-    <div class="main-color" style="margin-top : 1rem;" >
+    <div class="main-color" style="margin-top : 2rem;">
       비밀번호를 잊으셨나요?
     </div>
     <div class="main-color">
-      계정이 없으신가요? <span>가입하기</span>
+      계정이 없으신가요? <a href="#"><span style="color: #3897f0;"><b>가입하기</b></span></a>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: "login"
+    name: "login",
+    data() {
+      return {
+        userId: '',
+        password: ''
+      }
+    },
+    computed: {
+      isAbledLogin() {
+        if (this.userId.length >= 0 || this.password.length >= 0)
+          return true;
+      }
+    }
   }
 </script>
 
@@ -70,56 +91,31 @@
   }
 
   .sns-login {
-    text-align : center;
+    text-align: center;
   }
 
   .sns-login-detail {
-    display : inline-block;
+    display: inline-block;
   }
 
   .main-color {
-    color : #385185;
+    color: #385185;
   }
 
   .kakao-login {
-    align : center;
+    align: center;
     width: 20px;
     height: 22px;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    /*margin-top: 1rem;*/
+    /*margin-bottom: 1rem;*/
+    /*padding-top : 1px;*/
   }
 
   .google-login {
-    align : center;
+    align: center;
     width: 18px;
     height: 20px;
-    margin-bottom: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .line {
-    width : 100%;
-    margin : 0;
-    padding : 0;
-    text-align : center;
-    font-size : 12px;
-  }
-  .line:after {
-    display : inline-block;
-    margin :0 0 3px 20px;
-    height : 1px;
-    content: "";
-    text-shadow : none;
-    background-color : #999;
-    width : 40%;
-  }
-  .line:before{
-    display : inline-block;
-    margin : 0 20px 3px 0;
-    height:1px;
-    content : "";
-    text-shadow : none;
-
+    /*margin-bottom: 1rem;*/
   }
 
 </style>
