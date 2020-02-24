@@ -15,7 +15,7 @@ public class PlatformServerApplication {
 
 	@GetMapping
 	public String HelloWorld(){
-		return "Hello jieun";
+		return "hello ji";
 	}
 
 }
