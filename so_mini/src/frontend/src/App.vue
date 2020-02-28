@@ -1,23 +1,29 @@
 <template>
   <div id="app">
-    <TimelinePage
-      :posts="posts"/>
+    <LoginPage></LoginPage>
+<!--    <SignupPage></SignupPage>-->
+<!--    <TimelinePage-->
+<!--      :posts="posts"/>-->
   </div>
 </template>
 
 <script>
-  import posts from "./data/posts";
-  import TimelinePage from "./views/TimelinePage"
+  // import posts from "./data/posts";
+  // import TimelinePage from "./views/TimelinePage"
+  import LoginPage from "./views/LoginPage"
+  // import SignupPage from "./views/SignupPage"
 
   export default {
     name: 'app',
     data () {
       return {
-        posts,
+        // posts,
       }
     },
     components : {
-      "TimelinePage" : TimelinePage,
+      // "TimelinePage" : TimelinePage,
+      "LoginPage" : LoginPage,
+      // "SignupPage" : SignupPage,
     }
   }
 </script>
