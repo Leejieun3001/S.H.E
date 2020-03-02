@@ -13,14 +13,10 @@
               </a>
           </div>
           <div class="content2">
-            <sui-search
-            input
-            placeholder="검색"
-            :source="source"
-            v-model="valueSelectIcon"
-            >
-            <i slot="icon" class="search icon"></i>
-            </sui-search>
+            <form action="#">
+                <input type="search" placeholder="Write text here...">
+                <a href="#"></a>
+            </form>
           </div>
           <div class="content3">
               <div class="icons">
@@ -46,18 +42,18 @@
 </template>
 
 <script>
+    import Fa from 'vue-fa'
+    import { faFlag } from '@fortawesome/free-solid-svg-icons'
+    
     export default {
         name: "header-content",
+        components: {
+            Fa
+        },
         data() {
             return {
-            valueBasic: null,
-            valueSelectIcon: null,
-            source: [
-                { name: 'Horse' },
-                { name: 'Parrot' },
-                { name: 'Cat' },
-                { name: 'Catfish' },
-            ]};
+                faFlag 
+            }
         },
     };
 </script>
@@ -66,15 +62,17 @@
     .box {
         width: 100%;
         height: 77px;
-        margin: 10px 10px 10px 10px;
         text-align: center;
         position: fixed; 
         border-bottom: 1px solid #b8b8b860;
         top: 0;
-        background: #ffffff;
+        background-color: #ffffff;
         transition: top 0.2s ease-in-out;
         align-items: center;
         flex-direction: column;
+        z-index: 3;
+        box-sizing: border-box;
+        display: flex;
     }
 
     .container {
@@ -86,7 +84,8 @@
         justify-content: center;
         transition: top 0.2s ease-in-out;
         padding: 26px 20px;
-        max-width: 975px;
+        max-width: 1000px;
+        min-width: 900px;   
     }
 
     .content1 {
@@ -120,6 +119,12 @@
         font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
     }
 
+    .content2 {
+        flex: 1 9999 0%;
+        padding: 7px;
+        justify-content: center;
+    }
+
     .content3 {
         flex: 1 0 0%;
         align-content: center;    
@@ -127,8 +132,7 @@
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        justify-content: flex-end;        
-        padding-right : 50px;
+        justify-content: flex-end;  
     }
 
     .icons {
@@ -181,5 +185,6 @@
     a {
         color: #ffffff
     }
+
 
 </style>
