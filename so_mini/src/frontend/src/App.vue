@@ -1,23 +1,23 @@
 <template>
   <div id="app">
-    <login></login>
-    <headerContent></headerContent>
+    <TimelinePage
+      :posts="posts"/>
   </div>
 </template>
 
 <script>
-  import login from "./components/login";
-  import headerContent from "./components/header-content";
+  import posts from "./data/posts";
+  import TimelinePage from "./views/TimelinePage"
+
   export default {
     name: 'app',
     data () {
       return {
-        msg: 'Welcome to Your Vue.js App'
+        posts,
       }
     },
     components : {
-      'login' : login,
-      'headerContent' : headerContent,
+      "TimelinePage" : TimelinePage,
     }
   }
 </script>
