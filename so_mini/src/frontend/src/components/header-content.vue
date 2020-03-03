@@ -15,7 +15,7 @@
           <div class="content2">
             <form action="#">
                 <input type="search" placeholder="Write text here...">
-                <a href="#" class="fa fa-search"></a>
+                <a href="#"></a>
             </form>
           </div>
           <div class="content3">
@@ -42,9 +42,18 @@
 </template>
 
 <script>
+    import Fa from 'vue-fa'
+    import { faFlag } from '@fortawesome/free-solid-svg-icons'
+    
     export default {
-        name: "headerContent",
+        name: "header-content",
+        components: {
+            Fa
+        },
         data() {
+            return {
+                faFlag 
+            }
         },
     };
 </script>
