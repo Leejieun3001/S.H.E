@@ -1,23 +1,26 @@
 <template>
   <div id="app">
-    <TimelinePage
-      :posts="posts"/>
+    <HeaderContent></HeaderContent>
+    <MyPage
+    :userInfo="userInfo"/>
   </div>
 </template>
 
 <script>
-  import posts from "./data/posts";
-  import TimelinePage from "./views/TimelinePage"
-
+  import headers from "./components/HeaderContent";
+  import mypage from "./components/MyPage";
+  import userInfo from "./data/userInfo";
+  
   export default {
     name: 'app',
-    data () {
-      return {
-        posts,
-      }
+    components :  { 
+      "HeaderContent" : headers,
+      "MyPage" : mypage
     },
-    components : {
-      "TimelinePage" : TimelinePage,
+    data() {
+      return {
+        userInfo,
+      }
     }
   }
 </script>
