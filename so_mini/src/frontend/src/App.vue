@@ -1,22 +1,40 @@
 <template>
   <div id="app">
+<<<<<<< HEAD
     <LoginPage></LoginPage>
 <!--    <SignupPage></SignupPage>-->
 <!--    <TimelinePage-->
 <!--      :posts="posts"/>-->
+=======
+    <HeaderContent></HeaderContent>
+    <MyPage
+    :userInfo="userInfo"/>
+>>>>>>> upstream/master
   </div>
 </template>
 
 <script>
+<<<<<<< HEAD
   // import posts from "./data/posts";
   // import TimelinePage from "./views/TimelinePage"
   import LoginPage from "./views/LoginPage"
   // import SignupPage from "./views/SignupPage"
 
+=======
+  import headers from "./components/HeaderContent";
+  import mypage from "./components/MyPage";
+  import userInfo from "./data/userInfo";
+  
+>>>>>>> upstream/master
   export default {
     name: 'app',
-    data () {
+    components :  { 
+      "HeaderContent" : headers,
+      "MyPage" : mypage
+    },
+    data() {
       return {
+<<<<<<< HEAD
         // posts,
       }
     },
@@ -24,6 +42,10 @@
       // "TimelinePage" : TimelinePage,
       "LoginPage" : LoginPage,
       // "SignupPage" : SignupPage,
+=======
+        userInfo,
+      }
+>>>>>>> upstream/master
     }
   }
 </script>
