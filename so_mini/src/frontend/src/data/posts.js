@@ -8,8 +8,8 @@ let comments = [
 
 export default [{
   userName: "jieun123",
-  userImage: "@assets/example2.jpg",
-  postImage: "@assets/example2.jpg",
+  userImage: "src//assets//example1.jpg",
+  postImage: "src//assets//example2.jpg",
   location: "Starbucks Sadang",
   likes: 36,
   hasBeenLiked: false,
@@ -18,8 +18,8 @@ export default [{
 },
   {
     userName: "jihyun",
-    userImage: "../assets/example2.jpg",
-    postImage: "../assets/example2.jpg",
+    userImage: "src//assets//example2.jpg",
+    postImage: "src//assets//example2.jpg",
     location: "amsterdam",
     likes: 20,
     hasBeenLiked: false,
@@ -28,8 +28,8 @@ export default [{
   },
   {
     userName: "soll123",
-    userImage: "../assets/example2.jpg",
-    postImage: "../assets/example2.jpg",
+    userImage: "src//assets//example2.jpg",
+    postImage: "src//assets//example2.jpg",
     location: "paris",
     likes: 49,
     hasBeenLiked: false,

@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper">
-    <div class="header">
-      <HeaderContent></HeaderContent>
-    </div>
+<!--    <div class="header">-->
+<!--      <HeaderContent></HeaderContent>-->
+<!--    </div>-->
     <div class="container">
       <post v-for="post in posts"
             :post="post"

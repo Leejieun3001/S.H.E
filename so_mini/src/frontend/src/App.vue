@@ -1,16 +1,31 @@
 <template>
   <div id="app">
+<<<<<<< HEAD
+    <LoginPage></LoginPage>
+<!--    <SignupPage></SignupPage>-->
+<!--    <TimelinePage-->
+<!--      :posts="posts"/>-->
+=======
     <HeaderContent></HeaderContent>
     <MyPage
     :userInfo="userInfo"/>
+>>>>>>> upstream/master
   </div>
 </template>
 
 <script>
+<<<<<<< HEAD
+  // import posts from "./data/posts";
+  // import TimelinePage from "./views/TimelinePage"
+  import LoginPage from "./views/LoginPage"
+  // import SignupPage from "./views/SignupPage"
+
+=======
   import headers from "./components/HeaderContent";
   import mypage from "./components/MyPage";
   import userInfo from "./data/userInfo";
   
+>>>>>>> upstream/master
   export default {
     name: 'app',
     components :  { 
@@ -19,8 +34,18 @@
     },
     data() {
       return {
+<<<<<<< HEAD
+        // posts,
+      }
+    },
+    components : {
+      // "TimelinePage" : TimelinePage,
+      "LoginPage" : LoginPage,
+      // "SignupPage" : SignupPage,
+=======
         userInfo,
       }
+>>>>>>> upstream/master
     }
   }
 </script>
