@@ -1,22 +1,17 @@
 import Vue from 'vue'
 import SuiVue from 'semantic-ui-vue';
 import App from './App.vue'
-import VueRouter from 'vue-router';
-
-export const eventBus = new Vue()
+import router from './router'
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 
 Vue.use(SuiVue);
-Vue.use(VueRouter);
+Vue.use(VueAxios, axios);
 
-const routes = [
-  // router 등록
-];
+Vue.prototype.$axios = axios;
+Vue.config.productionTip = false;
 
-const router = new VueRouter({
-  routes
-})
 new Vue({
-  el: '#app',
   render: h => h(App),
-  router // router 추가
-})
+  router
+}).$mount('#app')

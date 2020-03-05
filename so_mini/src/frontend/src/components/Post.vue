@@ -27,11 +27,11 @@
           <i class="heart icon large"
              :class="{'red' : this.post.hasBeenLiked}"
              @click="like">
-          </i> &nbsp
+          </i>
           <i class="comment outline icon large"
              v-html="index">
           </i>
-          <p class="likes">{{post.likes}}ëª…ì´ ì¢‹ì•„í•©ë‹ˆë‹¤.</p>
+          <p class="likes">{{post.likes}}ëª…ì´ ì¢‹ì•„?•©?‹ˆ?‹¤.</p>
           <p class="caption">
             <span><b>{{post.userName}}</b></span>
             {{post.caption}}
@@ -40,7 +40,7 @@
         <div class="content__comments">
           <div v-if="post.comments.length>0"
                style="color:#999">
-            <b>ëŒ“ê¸€{{post.comments.length}}ê°œë³´ê¸°</b>
+            <b>?Œ“ê¸?{{post.comments.length}}ê°œë³´ê¸?</b>
           </div>
           <div v-if="post.comments.length>0">
             <comment
@@ -55,7 +55,7 @@
         <sui-form>
           <sui-form-field>
             <textarea
-              placeholder="ëŒ“ê¸€ ë‹¬ê¸°.."
+              placeholder="?Œ“ê¸? ?‹¬ê¸?.."
               rows="1"
               type="text"
               v-model="newComment"
@@ -97,12 +97,12 @@
         this.post.hasBeenLiked = !this.post.hasBeenLiked;
       },
       isClicked() {
-        alert("íŒ”ë¡œìš°ë¥¼ ì •ë§ ì·¨ì†Œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
+        alert("?Œ”ë¡œìš°ë¥? ? •ë§? ì·¨ì†Œ?•˜?‹œê² ìŠµ?‹ˆê¹??");
       },
       addComment() {
         if(this.newComment !== "") {
           let value = this.newComment && this.newComment.trim();
-          // ëŒ“ê¸€ì„ ê°±ì‹ í•˜ëŠ” ì‘ì—… í•„ìš”
+          // ?Œ“ê¸??„ ê°±ì‹ ?•˜?Š” ?‘?—… ?•„?š”
           this.clearInput();
         }
       },
@@ -140,7 +140,7 @@
   .header__profile__image--size {
     width : 100%;
     height : 100%;
-    object-fit : cover; /*ì´ë¯¸ì§€ì™€ ê°™ì€ ì˜¤ë¸Œì íŠ¸ë¥¼ ë°›ì•„ì„œ ë¹„ìœ¨ì„ ê·¸ëŒ€ë¡œ ìœ ì§€í•œ ì±„ë¡œ ì´ë¯¸ì§€ë¥¼ ê°€ê³µí•  ìˆ˜ ìˆìŒ*/
+    object-fit : cover; /*?´ë¯¸ì????? ê°™ì?? ?˜¤ë¸Œì ?Š¸ë¥? ë°›ì•„?„œ ë¹„ìœ¨?„ ê·¸ë??ë¡? ?œ ì§??•œ ì±„ë¡œ ?´ë¯¸ì??ë¥? ê°?ê³µí•  ?ˆ˜ ?ˆ?Œ*/
   }
   .header__title {
     flex : 15 15 auto;

@@ -15,13 +15,13 @@
           <div class="content2">
             <form action="#">
                 <input type="search" placeholder="Write text here...">
-                <a href="#" class="fa fa-search"></a>
+                <a href="#"><img class="btn" src="src\assets\search.png" alt="search_btn" width="20px" height="20px"/>></a>
             </form>
           </div>
           <div class="content3">
               <div class="icons">
                   <div class="explore-link">
-                    <a href="./">\
+                    <a href="./mypage">\
                         <img src="src\assets\explore.png" alt="explore-icon" width="25px" height="25px"/>
                     </a>
                   </div>
@@ -31,7 +31,7 @@
                     </a>
                   </div>
                   <div class="profile-link">
-                    <a href="./">\
+                    <a href="./feed">\
                         <img src="src\assets\profile.png" alt="profile-icon" width="25px" height="25px"/>
                     </a>
                   </div>
@@ -44,8 +44,6 @@
 <script>
     export default {
         name: "headerContent",
-        data() {
-        },
     };
 </script>
 
@@ -177,5 +175,57 @@
         color: #ffffff
     }
 
+    form {
+        position: absolute;
+        width : 46px;
+        height : 46px;
+        left: 50%;
+        top: 50%;
+        padding: 5px;
+        transform: translate(-50%, -50%);
+        border-radius: 50px;
+        border: 4px solid rgb(221, 221, 221);
+        box-sizing: border-box;
+        background: #fff;
+        transition: 1.0s;
+    }
 
+    input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        border: 0;
+        width: 100%;
+        height: 38px;
+        line-height: 75px;
+        outline: 0;
+        display: none;
+        font-size: 16px;
+        border-radius: 25px;
+        padding: 0 20px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .btn{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 38px;
+        height: 38px;
+        box-sizing: border-box;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 25px;
+        transition: 1.0;
+        background: #000000;
+        padding: 10px;
+    }
+
+    form:hover {
+        width: 250px;
+        cursor: pointer;
+    }
+    form:hover input{
+        display: block;
+    }
 </style>

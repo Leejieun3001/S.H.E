@@ -5,79 +5,115 @@
                 <div class="header-content1">
                     <div class="content1">
                         <div class="merge">
-                            <button class="btn" title="프로필 사진 바꾸기">
-                                <img alt="프로필 사진 바꾸기" class="image" src = "src\assets\s_profile.jpg">
-                            </button>
-                            <div>
-                                <form enctype="multipart/form-data" method="POST" role="presentation">
-                                    <input accept="image/jpeg, image/png" class = "img-form" type="file">
-                                </form>
-                            </div>
+                            <img alt="프로필 사진 바꾸기" class="image" :src = "u_img">
                         </div>
                     </div>
                 </div>
                 <section class="header-content2">
                     <div class="userinfo">
-                        <h1 class="username">los.eel</h1>
-                        <a class="user-edit" href="./">
+                        <h1 class="username">{{u_nickname}}</h1>
+                        <a class="user-edit" href="./mypage">
                             <button class="profile-edit" type="button">프로필 편집</button>
                         </a>
                         <div class="setting">
-                            <button class="user-setting" type="button">
-                                <img alt="설정" class="set-icon" fill="#262626" height="24" width="24" src = "src\assets\setting.png">
-                            </button>
+                            <a class="user-edit" href="./mypage">
+                                <button class="user-setting" type="button">
+                                    <img alt="설정" class="set-icon" fill="#262626" height="24" width="24" src = "src\assets\setting.png">
+                                </button>
+                            </a>
                         </div>
                     </div>
                     <ul class="postinfo">
                         <li class="info">
                             <span class="info-title">
                                 게시물
-                                <span class="info-content">146</span>
+                                <span class="info-content">{{post_count}}</span>
                             </span>
                         </li>
                         <li class="info">
                             <a class="follower" href="./">
                                 팔로워
-                                <span class="info-content" title="21">21</span>
+                                <span class="info-content">{{u_follower}}</span>
                             </a>
                         </li>
                         <li class="info">
                             <a class="following" href="./">
                                 팔로우
-                                <span class="info-content">23</span>
+                                <span class="info-content">{{u_follow}}</span>
                             </a>
                         </li>
                     </ul>
                     <div class="userMsg">
-                        <h1 class="message">los.eel</h1>
+                        <h1 class="message">{{u_bio}}</h1>
                         <br>
                     </div>
                 </section>
             </header>
-        </div>
-        <div class="feeds">
-                <article class="feed-list">
+            <div class="category">
+                <a class="user_category" href="./feed">
+                    <span class="category_content">
+                        <img alt="게시물" class="cate_img" src = "src\assets\explore.png">
+                        <span class="cate_text">게시물</span>
+                    </span>
+                </a>
+            </div>
+            <div class="feeds">
+                <article class="feed__list">
                     <div>
-                        <div style="flex-direction: column; padding-bottom: 2637px; padding-top: 0px">
-                            <div class="posts">
-                                <div class="post">
+                        <!-- 스크롤에 따라 padding-bottom값 변경 -->
+                        <div style="flex-direction: column; padding-bottom: 0px; padding-top: 0px;">
+                            <div class="posts" :v-for="post_images in chunkedPosting">
+                                <div class="post" :v-for="post_img in post_images"> 
+                                    <a href="./feed">
+                                        <img class="post__image" 
+                                            :src="post_img" 
+                                            width="293px" 
+                                            height="293px"
+                                            style="object-fit:cover;">
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </article>
             </div>
+        </div>
     </main>
 </template>
 
 <script>
+import userInfo from '../data/userInfo'
+import userPost from '../data/userpost'
+import chunk from 'chunk'
+
     export default {
-        name: "feed"
+        name: "myfeed",
+        props: {
+            userInfo: Object,
+            userPost: Object,
+        },
+        data() {
+            return {
+                u_img: userInfo.image,
+                u_nickname: userInfo.userName,
+                u_bio: userInfo.userBio,
+                u_follower: userInfo.follower,
+                u_follow: userInfo.follow,
+                post_count: userPost.posting.length,
+                post_images: userPost.posting,
+                post_img: userPost.posting[0].postImage,
+                chunkedPosting: null,
+            }
+        },
+        created() {
+                this.chunkedPosting = chunk(this.post_images, 3);
+                console.log(this.chunkedPosting);
+        },
     }
 </script>
 
 <style scoped>
-    div, header, section {
+    div, header, section, article {
         align-items: stretch;
         box-sizing: border-box;
         display: flex;
@@ -134,8 +170,12 @@
         margin-inline-end: 0px;
     }
 
+    a, a:visited {
+        text-decoration: none;
+    }
+
     .box {
-        background: #f1f1f1;
+        background: #f5f5f5;
         flex-grow: 1;
         order: 4;
     }
@@ -148,7 +188,6 @@
         flex-grow: 1;
         margin: 0 auto 30px;
         max-width: 935px;
-        border-bottom: 1px solid #c2c2c2;
     }
 
     .header-contents {
@@ -246,6 +285,7 @@
         font-size: 28px;
         line-height: 32px;
         margin: -5px 0 -6px;
+        font-family: inherit;
     }
 
     .user-edit {
@@ -255,7 +295,7 @@
     }
 
     .profile-edit {
-        background-color: #f1f1f1;
+        background-color: #f5f5f5;
         border: 1px solid #8f8e8e;
         color: #000000;
         width: 100%;
@@ -326,4 +366,64 @@
         font-weight: 600;
         color: #424242;
     }
+
+    .category {
+        align-items: center;
+        border-top: 1px solid rgba(var(--b38,219,219,219),1);
+        color: #999;
+        display: flex;;
+        flex-direction: row;
+        font-size: 12px;
+        font-weight: 600;
+        justify-content: center;
+        letter-spacing: 1px;
+        text-align: center;
+    }
+
+    .user_category {
+        align-items: center;
+        color: #262626;
+        margin-right: 60px;
+        border-top: 1px solid #262626;
+        margin-top: -1px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        height: 52px;
+        justify-content: center;
+        text-transform: uppercase;
+    }
+
+    .category_content {
+        display: flex;
+        align-items: center;
+    }
+
+    .cate_img {
+        display: block;
+        position: relative;
+        height: 12px;
+        width: 12px;
+    }   
+
+    .cate_text {
+        margin-left: 6px;
+    } 
+
+    .feed__list {
+        flex-grow: 1;
+    }
+
+    .posts {
+        flex-direction: row;
+        margin-bottom: 28px;
+        text-align: left;
+    }
+
+    .post {
+        display: inline;
+        position: relative;
+        margin-right: 28px;
+    }
+    
 </style>

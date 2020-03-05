@@ -1,25 +1,22 @@
 <template>
   <div id="app">
-    <HeaderContent></HeaderContent>
-    <MyPage
-    :userInfo="userInfo"/>
+    <div id="headerCon">
+      <HeaderContent></HeaderContent>
+    </div>
+    <router-view/>
   </div>
 </template>
 
 <script>
   import headers from "./components/HeaderContent";
-  import mypage from "./components/MyPage";
-  import userInfo from "./data/userInfo";
   
   export default {
     name: 'app',
     components :  { 
       "HeaderContent" : headers,
-      "MyPage" : mypage
     },
     data() {
       return {
-        userInfo,
       }
     }
   }

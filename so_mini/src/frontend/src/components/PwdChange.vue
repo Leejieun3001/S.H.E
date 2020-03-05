@@ -3,100 +3,65 @@
         <div class="container">
             <ul class="title-list">
                 <li>
-                    <a class="list select" href="./mypage">프로필 편집</a>
+                    <a class="list unselect" href="./mypage">프로필 편집</a>
                 </li>
                 <li>
-                    <a class="list unselect" href="./pwdchange">비밀번호 변경</a>
+                    <a class="list select" href="./pwdchange">비밀번호 변경</a>
                 </li>
             </ul>
             <article class="main-contents">
                 <div class="profile">
                     <div class="profile__image">
-                        <div class="profile__image-btn">
-                            <button class="change" title="프로필 사진 바꾸기" @click="changePhoto">
-                                <img alt="프로필 사진 바꾸기" class="img_change" :src="u_img">
-                            </button>
-                            <div>
-                                <form enctype="multipart/form-data" method="POST" role="presentation">
-                                    <input accept="image/jpeg,image/png" class="img_input" type="file" @change="onFileSelected" :v-model="u_img">
-                                </form>
-                            </div>
-                        </div>
+                        <img alt="프로필 사진" class="img_change proImg" :src="u_img">
                     </div>
                     <div class="profile__text">
-                        <h1 class="profile__text__username" title="nickName">{{u_nickname}}</h1>
-                        <button class="profile__text__change" type="button">프로필 사진 바꾸기
-                            <div>
-                                <form enctype="multipart/form-data" method="POST" role="presentation">
-                                    <input accept="image/jpeg,image/png" class="img_input" type="file" @change="onFileSelected" :v-model="u_img">
-                                </form>
-                            </div>
-                        </button>
+                        <h1 class="profile__text__username" title="los.eel">los.eel</h1>
                     </div>
                 </div>
-                <form class="form__list" method="POST">
+                <form @submit.prevent="submit" class="form__list" method="POST">
                     <div class="form__list__contents">
                         <aside class="form__list__title">
-                            <label for="name">이름</label>
+                            <label for="oldPwd">이전 비밀번호</label>
                         </aside>
                         <div class="form__list__input">
-                            <input aria-required="false" ref='u_img' id="name" type="text" class="form__input" v-model="u_name">
+                            <input autocomplete="current-password" 
+                                    class="password" 
+                                    id="OldPassword" 
+                                    name="OldPassword" 
+                                    required 
+                                    spellcheck="true" 
+                                    type="password" 
+                                    v-model="curPwd"/>
                         </div>
                     </div>
                     <div class="form__list__contents">
                         <aside class="form__list__title">
-                            <label for="userName">사용자 이름</label>
+                            <label for="newPwd">새 비밀번호</label>
                         </aside>
                         <div class="form__list__input">
-                            <input aria-required="true" ref='u_img' id="userName" type="text" class="form__input" v-model="u_nickname">
+                            <input autocomplete="new-password" 
+                                    class="password" 
+                                    id="NewPassword" 
+                                    name="NewPassword" 
+                                    required 
+                                    spellcheck="true" 
+                                    type="password" 
+                                    v-model="newPwd">
                         </div>
                     </div>
                     <div class="form__list__contents">
                         <aside class="form__list__title">
-                            <label for="userBio">소개</label>
+                            <label for="newPwd">비밀번호 확인</label>
                         </aside>
                         <div class="form__list__input">
-                            <textarea class="form__textarea" id="userBio" v-model="u_bio"></textarea>
-                        </div>
-                    </div>
-                    <div class="form__list__contents">
-                        <aside class="form__list__title">
-                            <label></label>
-                        </aside>
-                        <div class="form__list__input">
-                            <div class="form__text" style="max-width:355px;">
-                                <h2 class="form__text__deco">개인 정보</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form__list__contents">
-                        <aside class="form__list__title">
-                            <label for="userEmail">이메일</label>
-                        </aside>
-                        <div class="form__list__input">
-                            <input aria-required="false" id="userEmail" type="text" class="form__input" v-model="u_email">
-                        </div>
-                    </div>
-                    <div class="form__list__contents">
-                        <aside class="form__list__title">
-                            <label for="userPhoneNumber">전화번호</label>
-                        </aside>
-                        <div class="form__list__input">
-                            <input aria-required="false" id="userPhoneNumber" type="text" class="form__input" v-model="u_phoneNum">
-                        </div>
-                    </div>
-                    <div class="form__select__gender">
-                        <div class="form__list__contents">
-                            <aside class="form__list__title">
-                                <label for="gender">성별</label>
-                            </aside>
-                            <div class="form__list__input">
-                                <div class="gender__select" style="max-width:355px;">
-                                    <button class="gender__btn" type="button">
-                                        <input readonly type="text" class="gender__text" v-model="gender">
-                                    </button>
-                                </div>
-                            </div>
+                            <input autocomplete="new-password" 
+                                    class="password" 
+                                    id="ConfirmPwd" 
+                                    name="ConfirmPwd" 
+                                    required 
+                                    spellcheck="true" 
+                                    type="password" 
+                                    v-model="cfmPwd">
                         </div>
                     </div>
                     <div class="form__list__contents">
@@ -106,9 +71,7 @@
                         <div class="form__list__input">
                             <div class="submit">
                                 <button class="submit__btn" 
-                                        v-on:click="submitForm"
-                                        type="button"
-                                        v-bind:disabled=1>제출
+                                        v-bind:disabled="curPwd==='' || newPwd==='' || cfmPwd===''">비밀번호 변경
                                 </button>
                             </div>
                         </div>
@@ -122,46 +85,39 @@
 <script>
 import userInfo from '../data/userInfo'
 
+var qs = require('qs')
+
     export default {
         name: "mypage",
         props: {
-            userInfo: Object,
+            userInfo: Object
         },
         data() {
             return {
                 u_img: userInfo.image,
-                u_nickname: userInfo.userName,
-                u_name: userInfo.name,
-                u_bio: userInfo.userBio,
-                u_email: userInfo.email,
-                u_phoneNum: userInfo.phoneNumber,
-                gender: ''
+                u_pwd: userInfo.pwd,
+                curPwd: '',
+                newPwd: '',
+                cfmPwd: '',
+                filled: true,
+                result: null
             }
         },
-        created() {
-            if(userInfo.gender == '0') {
-                return this.gender = '여성'
-            }
-            else if(userInfo.gender == '1') {
-                return this.gender = '남성'
-            }
-            else {
-                return this.gender = '중성'
-            }
-        },
+        
         methods: {
-            submitForm() {
-                
+            submit(e) {
+                // post url : 서버 주소 
+                this.$axios.post('/api/data', qs.stringify({newPwd : this.newPwd}),
+                {
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                })
+                .then(res => { 
+                    console.log(res); 
+                    this.result = res.data
+                }).catch(err => {
+                    console.warn("ERROR : ", err)
+                })
             },
-            onFileSelected(event) { 
-                this.u_img = this.$refs.uploadImageFile.files[0]
-            },
-            async onSave(){ 
-                const fd = new FormData(); 
-                fd.append('u_img', this.u_img);
-                // image file upload
-                await axios.post('/api/data',fd); 
-            }
         }
     }
 </script>
@@ -323,18 +279,6 @@ import userInfo from '../data/userInfo'
         width: 100%;
     }
 
-    .profile__image-btn::after {
-        border: 1px solid rgba(0,0,0,.0975);
-        border-radius: 50%;
-        bottom: 0;
-        content: "";
-        left: 0;
-        pointer-events: none;
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-
     .change {
         border: 0;
         cursor: pointer;
@@ -359,21 +303,18 @@ import userInfo from '../data/userInfo'
         flex: 0 1 auto;
         margin-right: 20px;
         overflow-x: hidden;
-    }
-
-    .profile__text>button {
-        text-align: left;
+        align-items: center;
     }
 
     .profile__text__username {
-        font-size: 20px;
+        font-size: 23px;
         line-height: 22px;
-        margin-bottom: 2px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
         font-weight: 400;
-        text-align: left;
+        text-align: center;
+        margin-top: 8px;
     }
 
     .profile__text__change {
@@ -415,7 +356,7 @@ import userInfo from '../data/userInfo'
         font-size: 16px;
         font-weight: 600;
         line-height: 18px;
-        margin-top: 6px;
+        margin-top: 11px;
     }
 
     .form__list__input {
@@ -468,58 +409,15 @@ import userInfo from '../data/userInfo'
         font-weight: 600;
     }
 
-    .form__select__gender {
-        flex: 0 0 auto;
-        justify-content: flex-start;
-        align-items: stretch;
-        align-content: stretch;
-    }
-
-    .gender__select {
-        flex: 1 1 auto;
-        min-height: 0;
-        min-width: 0;
-        justify-content: flex-start;
-        align-items: flex-start;
-        align-content: stretch;
-    }
-
-    .gender__btn {
-        color: #262626;
-        border: 0;
-        color: #3897f0;
-        display: inline;
-        padding: 0;
-        position: relative;
-        background-color: transparent;
-        width: 100%;
-        background: 0 0;
-        box-sizing: border-box;
-        cursor: pointer;
-        font-weight: 600;
-        text-align: center;
-        text-transform: inherit;
-        text-overflow: ellipsis;
-        user-select: none;
-    }
-
-    .gender__text {
-        background: 0 0;
-        border: 1px solid #dbdbdb;
-        border-radius: 3px;
-        box-sizing: border-box;
-        color: #262626;
-        flex: 0 1 355px;
-        font-size: 16px;
-        height: 32px;
-        padding: 0 10px;
-        width: 100%;
-    }
-
     .submit {
         align-items: center;
         flex-direction: row;
         margin-top: 16px;
+    }
+
+    .submit__btn[disabled] {
+        background-color: #3897f04d;
+        opacity: 1;
     }
 
     .submit__btn {
@@ -539,17 +437,37 @@ import userInfo from '../data/userInfo'
         position: relative;
         background-color: #3897f0;
         border: 1px solid transparent;
-        font-size: 15px;
+        font-size: 14px;
     }
 
-    .submit__btn[disabled] {
-        background-color: #3897f04d;
-        opacity: 1;
+    .proImg {
+        background-color: #fafafa;
+        border-radius: 50%;
+        box-sizing: border-box;
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+        height: 100%;
+        width: 100%;
+    }
+
+    .password {
+        outline: 0!important;
+        background: #fafafa;
+        border-radius: 6px;
+        border: 1px solid #dbdbdb;
+        color: #262626;
+        flex-grow: 1;
+        font-size: 14px;
+        line-height: 30px;
+        margin: 0;
+        overflow: visible;
+        padding: 4px 12px;
     }
 
     .unselect:hover {
         border-left-color: #929292;
-        background-color: #f3f3f3;
+        background-color: #f7f7f7;
     }
 
 </style>
