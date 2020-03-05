@@ -1,21 +1,18 @@
 package com.she.domain;
 
+import java.util.List;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name="hashtag")
 public class Hashtag {
-	@Id
-	@Column(name="h_id")
-	int h_id;
+	@JsonIgnore
+	@OneToMany(mappedBy="post_tag")
+	List<PostTag> post_tag;
 
-	@Column(name="hashtag")
-	String content;
-
-//	@Column(name="p_id")
-
-
+	String hashtag;
 }

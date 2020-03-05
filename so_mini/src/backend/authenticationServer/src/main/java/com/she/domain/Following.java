@@ -1,6 +1,9 @@
 package com.she.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import lombok.Data;
 
@@ -13,7 +16,6 @@ public class Following {
 	@JoinColumn(name="u_idx")
 	User user;
 
-	int following_idx;
 	String following_nickname;
 
 }

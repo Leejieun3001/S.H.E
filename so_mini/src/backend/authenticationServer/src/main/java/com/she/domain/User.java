@@ -55,10 +55,14 @@ public class User {
 
 	@JsonIgnore
 	@OneToMany(mappedBy="user")
-	List<Following> followers;
+	List<Following> followings;
+
+	@JsonIgnore
+	@OneToMany(mappedBy="user")
+	List<Followers> followers;
 
 	public List<Following> getFollowing() {
-		return followers;
+		return followings;
 	}
 
 }
