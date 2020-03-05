@@ -51,10 +51,10 @@ DROP TABLE IF EXISTS `followers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `followers` (
-  `user_id` int NOT NULL,
-  `follower_id` json NOT NULL,
-  PRIMARY KEY (`user_id`),
-  CONSTRAINT `u_idx` FOREIGN KEY (`user_id`) REFERENCES `user` (`u_idx`)
+  `u_idx` int NOT NULL,
+  `follower_nickname` json NOT NULL,
+  PRIMARY KEY (`u_idx`),
+  CONSTRAINT `u_idx` FOREIGN KEY (`u_idx`) REFERENCES `user` (`u_idx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -176,6 +176,7 @@ CREATE TABLE `post` (
   `p_writer` varchar(20) NOT NULL,
   `p_content` text NOT NULL,
   `p_regist_datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `coment_cnt` int DEFAULT NULL,
   PRIMARY KEY (`p_idx`),
   KEY `p_writer_idx` (`p_writer`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -187,7 +188,7 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
-INSERT INTO `post` VALUES (1,'{\"id\": \"dfd\", \"name\": 23}','dddd',0,0,'ddd','ddd','2020-03-04 00:11:54'),(2,'{\"id\": \"dfd\", \"name\": 23}','sds',0,0,'ㄴ','ㄴ','2020-03-04 11:55:59'),(3,'{\"id\": \"dfd\", \"name\": 23}','안녕',0,0,'아','제발','2020-03-04 11:56:33');
+INSERT INTO `post` VALUES (1,'{\"id\": \"dfd\", \"name\": 23}','dddd',0,0,'ddd','ddd','2020-03-04 00:11:54',NULL),(2,'{\"id\": \"dfd\", \"name\": 23}','sds',0,0,'ㄴ','ㄴ','2020-03-04 11:55:59',NULL),(3,'{\"id\": \"dfd\", \"name\": 23}','안녕',0,0,'아','제발','2020-03-04 11:56:33',NULL);
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,6 +216,32 @@ CREATE TABLE `post_tag` (
 LOCK TABLES `post_tag` WRITE;
 /*!40000 ALTER TABLE `post_tag` DISABLE KEYS */;
 /*!40000 ALTER TABLE `post_tag` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `somini_commnet`
+--
+
+DROP TABLE IF EXISTS `somini_commnet`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `somini_commnet` (
+  `c_idx` int NOT NULL,
+  `c_content` varchar(255) DEFAULT NULL,
+  `c_regist_datetime` datetime(6) DEFAULT NULL,
+  `c_writer` varchar(255) DEFAULT NULL,
+  `p_idx` int DEFAULT NULL,
+  PRIMARY KEY (`c_idx`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `somini_commnet`
+--
+
+LOCK TABLES `somini_commnet` WRITE;
+/*!40000 ALTER TABLE `somini_commnet` DISABLE KEYS */;
+/*!40000 ALTER TABLE `somini_commnet` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -265,4 +292,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-05 17:07:30
+-- Dump completed on 2020-03-05 17:23:23
