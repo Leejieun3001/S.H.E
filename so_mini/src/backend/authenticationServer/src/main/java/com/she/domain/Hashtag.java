@@ -10,9 +10,15 @@ import lombok.Data;
 @Entity
 @Table(name="hashtag")
 public class Hashtag {
-	@JsonIgnore
-	@OneToMany(mappedBy="post_tag")
-	List<PostTag> post_tag;
+	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@Column(name="h_idx")
+	int h_idx;
 
 	String hashtag;
+
+	@JsonIgnore
+	@OneToMany(mappedBy="hashtag")
+	List<PostTag> post_tag;
+
 }

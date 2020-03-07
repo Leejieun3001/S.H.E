@@ -2,13 +2,12 @@ package com.so_mini.domain.model;
 
 
 import lombok.*;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
+
 /**
  * @Author : jieun
  * @Description : 개시물 엔티티
@@ -33,21 +32,21 @@ public class Post implements Serializable {
     String p_location;
     @Column(name = "likes_cnt")
     int likes_cnt;
-    @Column(name = "coment_cnt")
-    int coment_cnt;
+    @Column(name = "comment_cnt")
+    int comment_cnt;
     @Column(name = "p_writer")
     String p_writer;
     @Column(name = "p_content")
     String p_content;
 
     @Builder
-    public Post(int p_idx, LocalDateTime p_regist_datetime, String p_img, String p_location, int likes_cnt, int coment_cnt, String p_writer, String p_content) {
+    public Post(int p_idx, LocalDateTime p_regist_datetime, String p_img, String p_location, int likes_cnt, int comment_cnt, String p_writer, String p_content) {
         this.p_idx = p_idx;
         this.p_regist_datetime = p_regist_datetime;
         this.p_img = p_img;
         this.p_location = p_location;
         this.likes_cnt = likes_cnt;
-        this.coment_cnt = coment_cnt;
+        this.comment_cnt = comment_cnt;
         this.p_writer = p_writer;
         this.p_content = p_content;
     }

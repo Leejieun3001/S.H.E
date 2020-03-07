@@ -8,7 +8,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "somini.commnet")
+@Table(name = "comment")
 @Entity
 public class Comment {
     @Id

@@ -47,7 +47,7 @@ public class Post {
 	List<Comment> comments;
 
 	@JsonIgnore
-	@OneToMany(mappedBy="post_tag")
+	@OneToMany(mappedBy="post")
 	List<PostTag> post_tag;
 
 	@Builder
