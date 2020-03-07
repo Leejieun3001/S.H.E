@@ -9,11 +9,13 @@ import lombok.Data;
 @Entity
 @Table(name="following")
 public class Following {
+	@Id
+	String following_nickname;
+
 	@ManyToOne
 	@JoinColumn(name="u_idx")
 	User user;
 
-	int following_idx;
-	String following_nickname;
+
 
 }

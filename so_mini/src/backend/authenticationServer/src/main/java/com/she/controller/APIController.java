@@ -2,15 +2,15 @@ package com.she.controller;
 
 import java.util.List;
 
+import com.she.domain.User;
+import com.she.domain.Following;
+import com.she.repository.FollowingRepository;
+import com.she.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.she.domain.User;
-import com.she.domain.Following;
-import com.she.repository.UserRepository;
-import com.she.repository.FollowingRepository;
 
 @RestController
 @RequestMapping("api")
