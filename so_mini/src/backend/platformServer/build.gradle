@@ -57,7 +57,7 @@ dependencies {
 	runtime('mysql:mysql-connector-java')
 
 }
-
+e
 test {
 	useJUnitPlatform()
 }

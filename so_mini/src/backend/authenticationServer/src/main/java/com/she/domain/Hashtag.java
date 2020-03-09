@@ -1,7 +1,9 @@
 package com.she.domain;
 
+import java.util.List;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Data
@@ -9,13 +11,14 @@ import lombok.Data;
 @Table(name="hashtag")
 public class Hashtag {
 	@Id
-	@Column(name="h_id")
-	int h_id;
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@Column(name="h_idx")
+	int h_idx;
 
-	@Column(name="hashtag")
-	String content;
+	String hashtag;
 
-//	@Column(name="p_id")
-
+	@JsonIgnore
+	@OneToMany(mappedBy="hashtag")
+	List<PostTag> post_tag;
 
 }

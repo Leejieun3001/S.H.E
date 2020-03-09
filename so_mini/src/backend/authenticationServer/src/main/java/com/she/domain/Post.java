@@ -42,6 +42,14 @@ public class Post {
 	@OneToMany(mappedBy="post")
 	List<Like> likes;
 
+	@JsonIgnore
+	@OneToMany(mappedBy="post")
+	List<Comment> comments;
+
+	@JsonIgnore
+	@OneToMany(mappedBy="post")
+	List<PostTag> post_tag;
+
 	@Builder
 	public Post(int p_idx, LocalDateTime p_regist_datetime, String p_img, String p_location, int likes_cnt, int coment_cnt, String p_writer, String p_content) {
 		this.p_idx = p_idx;
