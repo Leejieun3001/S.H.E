@@ -20,7 +20,6 @@ import org.springframework.web.client.RestTemplate;
 public class Oauth2Controller {
 	private final Gson gson;
 	private final RestTemplate restTemplate;
-
 	@GetMapping(value = "/callback")
 	public OAuthToken callbackSocial(@RequestParam String code) {
 
