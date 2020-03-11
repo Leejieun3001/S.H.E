@@ -11,8 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Collections;
-
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -28,7 +26,7 @@ public class UserJpaRepoTest {
         // given
         userJpaRepo.save(User.builder()
                 .email("happydaddy@gmail.com")
-                .u_pwd(passwordEncoder.encode("{none}1234"))
+                .pwd(passwordEncoder.encode("{none}1234"))
                 .name("happydaddy")
                 .build());
     }

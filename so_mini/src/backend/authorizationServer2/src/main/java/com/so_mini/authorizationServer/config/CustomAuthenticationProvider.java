@@ -11,8 +11,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 
@@ -38,7 +36,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
         User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("user is not exists!!!!"));
 
-        if (!pwdEncoder.matches(password, user.getU_pwd()))
+        if (!pwdEncoder.matches(password, user.getPwd()))
             throw new BadCredentialsException("password is not valid!!!");
         return new UsernamePasswordAuthenticationToken(email, password, user.getAuthorities());
 

@@ -32,7 +32,7 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "u_idx")
-    int uid;
+    int uidx;
 
     @Column(name = "u_email")
     String email;
@@ -44,7 +44,7 @@ public class User implements UserDetails {
     String google_code;
 
     @Column(name = "u_pwd")
-    String u_pwd;
+    String pwd;
 
     Date regist_date;
     Date pw_update_date; //패스워드 변경일
@@ -96,7 +96,7 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return "{noop}"+ this.u_pwd;
+        return this.pwd;
     }
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

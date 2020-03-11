@@ -26,7 +26,7 @@ public class Oauth2PlatformServerConfig extends ResourceServerConfigurerAdapter 
                 .antMatchers("/v1/users").access("#oauth2.hasScope('read')")
                 .anyRequest().authenticated();
     }
-       */
+     */
 
     @Value("${security.oauth2.jwt.signkey}")
     private String signKey;
