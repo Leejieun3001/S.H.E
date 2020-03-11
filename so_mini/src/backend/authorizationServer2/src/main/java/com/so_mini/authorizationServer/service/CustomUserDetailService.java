@@ -32,7 +32,7 @@ public class CustomUserDetailService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("User Name " + email + "Not Found");
         }
-        return new org.springframework.security.core.userdetails.User(user.get().getEmail(), encoder.encode(user.get().getU_pwd()), getGrantedAuthorities(user));
+        return new org.springframework.security.core.userdetails.User(user.get().getEmail(),encoder.encode(user.get().getU_pwd()), getGrantedAuthorities(user));
     }
     @Bean
     private BCryptPasswordEncoder pwdEncoder() {
