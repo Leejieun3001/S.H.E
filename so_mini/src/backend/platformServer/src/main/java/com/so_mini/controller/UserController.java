@@ -2,6 +2,7 @@ package com.so_mini.controller;
 
 import com.so_mini.domain.model.Post;
 import com.so_mini.repository.PostRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,5 +55,9 @@ public class UserController {
         return response;
     }
 
+    @GetMapping(value = "/users")
+    public List<Post> findAllUser() {
+        return postRepository.findAll();
+    }
 
 }

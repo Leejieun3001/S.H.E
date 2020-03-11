@@ -41,6 +41,10 @@ dependencies {
 	implementation ('org.springframework.boot:spring-boot-starter-web'){
 		exclude module : "jackson-databind"
 	}
+//인증
+	implementation 'org.springframework.cloud:spring-cloud-starter-security:2.1.2.RELEASE'
+	implementation 'org.springframework.cloud:spring-cloud-starter-oauth2:2.1.2.RELEASE'
+
 	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
 	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 
