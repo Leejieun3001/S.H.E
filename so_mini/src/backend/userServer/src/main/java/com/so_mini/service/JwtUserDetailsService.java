@@ -24,7 +24,7 @@ public class JwtUserDetailsService implements UserDetailsService {
     private AccountRepository accountRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String nickname) throws UsernameNotFoundException {
+    public CustomUserDetails loadUserByUsername(String nickname) throws UsernameNotFoundException {
         Account account = accountRepository.findByNickname(nickname);
 
         List<GrantedAuthority> roles = new ArrayList<>();
@@ -39,7 +39,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
         CustomUserDetails customUserDetails = new CustomUserDetails();
 
-        customUserDetails.setIdx(String.valueOf(account.getIdx()));
+        customUserDetails.setIdx(account.getIdx());
         customUserDetails.setUsername(account.getNickname());
         customUserDetails.setPassword(account.getPassword());
         customUserDetails.setRoles(roles);

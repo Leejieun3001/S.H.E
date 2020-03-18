@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Data
 public class CustomUserDetails implements UserDetails {
 
-	private String idx; //customizing
+	private Integer idx; //customizing
 	private String username; // = nickname
 	private String password;
 	private List<GrantedAuthority> roles;

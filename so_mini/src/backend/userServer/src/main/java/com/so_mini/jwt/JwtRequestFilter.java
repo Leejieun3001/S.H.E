@@ -95,7 +95,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         } else if (redisTemplate.opsForValue().get(jwtToken) != null) {
             logger.warn("this token already logout!");
         } else {
-            //DB access 대신에 파싱한 정보로 유저 만들기!
+            //DB access 대신에 파싱한 정보로 유저 만들기
             Authentication authen =  getAuthentication(jwtToken);
             //만든 authentication 객체로 매번 인증받기
             SecurityContextHolder.getContext().setAuthentication(authen);

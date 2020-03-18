@@ -22,8 +22,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.*;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-@RequestMapping // This means URL's start with /demo (after Application path)
+@RequestMapping
 public class UserController {
 
 	private Logger logger = LoggerFactory.getLogger(ApplicationRunner.class);
@@ -49,23 +49,27 @@ public class UserController {
 	private PasswordEncoder bcryptEncoder;
 
 	@PostMapping(path = "/public/signin")
-	public Map<String, Object> login(@RequestBody Map<String, String> m) throws Exception {
+	public Map<String, Object> login(@RequestBody Map<String, String> m) throws DisabledException, LockedException, BadCredentialsException {
 		final String nickname = m.get("nickname");
 		System.out.println("닉네임:"+ m.get("nickname"));
 		logger.info("test input username: " + nickname);
 		try {
-			System.out.println("여기에러야1");
 			am.authenticate(new UsernamePasswordAuthenticationToken(nickname, m.get("password")));
-			System.out.println("여기에러야2");
-		} catch (Exception e){
-			System.out.println("여기에러야??");
+		} catch (DisabledException e){
+			System.out.println("DisabledException error");
+			throw e;
+		} catch (LockedException e) {
+			System.out.println("LockedException error");
+			throw e;
+		} catch (BadCredentialsException e) {
+			System.out.println("BadCredentialException error");
+			throw e;
+		} catch (AuthenticationException e ) {
+			System.out.println("AuthenticationException error");
 			throw e;
 		}
-		System.out.println("여기까지성공?1");
-		final CustomUserDetails userDetails = userDetailsService.loadUserByUsername(nickname);
-		System.out.println("여기까지성공?2");
-		final String accessToken = jwtTokenUtil.generateAccessToken(userDetails);
-		System.out.println("여기까지성공?3");
+		final CustomUserDetails customUserDetails = userDetailsService.loadUserByUsername(nickname);
+		final String accessToken = jwtTokenUtil.generateAccessToken(customUserDetails);
 		final String refreshToken = jwtTokenUtil.generateRefreshToken(nickname);
 
 		Token retok = new Token();
@@ -87,8 +91,6 @@ public class UserController {
 
 	@PostMapping(path = "/public/signup") // Map ONLY POST Requests
 	public Map<String, Object> addNewUser(@RequestBody Account account) {
-		// @ResponseBody means the returned String is the response, not a view name
-		// @RequestParam means it is a parameter from the GET or POST request
 		String un = account.getNickname();
 		Map<String, Object> map = new HashMap<>();
 		System.out.println("회원가입요청 아이디: " + un + "비번: " + account.getPassword());
@@ -96,9 +98,7 @@ public class UserController {
 			account.setPassword(bcryptEncoder.encode(account.getPassword()));
 			account.setGrade("1");
 			map.put("success", true);
-			System.out.println("여기까지 성공?");
 			accountRepository.save(account);
-			System.out.println("여기까지 성공?2 ");
 			return map;
 		} else {
 			map.put("success", false);

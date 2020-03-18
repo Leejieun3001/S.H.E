@@ -58,6 +58,8 @@ public class JwtTokenUtil implements Serializable {
     public String generateAccessToken(CustomUserDetails customUserDetails) {
         Map<String, Object> claims = new HashMap<>();
         List<String> li = new ArrayList<>();
+        String encodedString = Base64.getEncoder().encodeToString(secret.getBytes());
+
         for (GrantedAuthority a: customUserDetails.getAuthorities()) {
             li.add(a.getAuthority());
         }
@@ -68,13 +70,14 @@ public class JwtTokenUtil implements Serializable {
                 .setSubject(customUserDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_ACCESS_TOKEN_VALIDITY * 1000))
-                .signWith(SignatureAlgorithm.HS512, secret).compact();
+                .signWith(SignatureAlgorithm.HS512, encodedString).compact();
     }
 
     public String generateRefreshToken(String nickname) {
+        String encodedString = Base64.getEncoder().encodeToString(secret.getBytes());
         return Jwts.builder().setSubject(nickname).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_REFRESH_TOKEN_VALIDITY * 1000))
-                .signWith(SignatureAlgorithm.HS512, secret).compact();
+                .signWith(SignatureAlgorithm.HS512, encodedString).compact();
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
