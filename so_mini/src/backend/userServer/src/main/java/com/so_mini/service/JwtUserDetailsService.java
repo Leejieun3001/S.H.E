@@ -24,20 +24,33 @@ public class JwtUserDetailsService implements UserDetailsService {
     private AccountRepository accountRepository;
 
     @Override
-    public CustomUserDetails loadUserByUsername(String nickname) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String nickname) throws UsernameNotFoundException {
         Account account = accountRepository.findByNickname(nickname);
 
         List<GrantedAuthority> roles = new ArrayList<>();
 
         if (account == null) {
-            throw new UsernameNotFoundException("User not found with nickname: " + nickname);
+            throw new UsernameNotFoundException(nickname + "is not found");
         }
+
         if ((account.getGrade()).equals("1")) {
             roles.add(new SimpleGrantedAuthority("ROLE_USER"));
         } else roles.add(new SimpleGrantedAuthority("ROLE_HI"));
 
-        return new CustomUserDetails(String.valueOf(account.getIdx()), account.getNickname(), account.getPassword(),roles, false );
+        CustomUserDetails customUserDetails = new CustomUserDetails();
 
+        customUserDetails.setIdx(String.valueOf(account.getIdx()));
+        customUserDetails.setUsername(account.getNickname());
+        customUserDetails.setPassword(account.getPassword());
+        customUserDetails.setRoles(roles);
+        customUserDetails.setPassword(account.getPassword());
+        customUserDetails.setPassword(account.getPassword());
+        customUserDetails.setEnabled(true);
+        customUserDetails.setAccountNonExpired(true);
+        customUserDetails.setAccountNonLocked(true);
+        customUserDetails.setCredentialsNonExpired(true);
+
+        return customUserDetails;
     }
 
 }
