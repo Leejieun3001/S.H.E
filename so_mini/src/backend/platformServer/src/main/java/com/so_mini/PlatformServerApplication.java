@@ -19,8 +19,6 @@ public class PlatformServerApplication {
         return new ApplicationRunner() {
             @Override
             public void run(ApplicationArguments args) throws Exception {
-               //userRepository.save(new User(1, "test","test","test","test","test","test","test","test","test",1,"test","test","test", 2,"1010"));
-              // postRepository.save(new Post(2, LocalDateTime.now(),"23","23",0,0,"23","23"));
             }
         };
     }
