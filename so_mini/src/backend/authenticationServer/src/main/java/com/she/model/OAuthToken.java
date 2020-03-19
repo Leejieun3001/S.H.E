@@ -5,6 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+//토큰정보를 받을 모델 생성
 public class OAuthToken {
 	private String access_token;
 	private String token_type;
