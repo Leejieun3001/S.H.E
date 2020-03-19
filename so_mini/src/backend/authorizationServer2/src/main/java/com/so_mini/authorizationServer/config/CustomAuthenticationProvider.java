@@ -35,9 +35,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String password = authentication.getCredentials().toString();
 
 
+<<<<<<< HEAD
         User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("user is not exists!!!!"));
         int uIdx = user.getUid();
         if (!pwdEncoder.matches(password, user.getU_pwd()))
+=======
+        if (!pwdEncoder.matches(password, user.getPwd()))
+>>>>>>> jieun
             throw new BadCredentialsException("password is not valid!!!");
         return new UsernamePasswordAuthenticationToken(email, password, user.getAuthorities());
 

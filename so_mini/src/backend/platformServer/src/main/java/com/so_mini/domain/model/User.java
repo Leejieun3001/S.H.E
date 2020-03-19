@@ -1,4 +1,5 @@
-package com.so_mini.authorizationServer.model;
+package com.so_mini.domain.model;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
