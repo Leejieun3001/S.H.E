@@ -1,6 +1,7 @@
 package com.so_mini.domain;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
@@ -13,12 +14,13 @@ import lombok.Data;
 @Table(name="post")
 public class Post {
 	@Id
-	@Column(name = "p_idx")
+	@Column(name = "p_idx", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	int p_idx;
 
-	@Column(name = "p_regist_datetime")
-	LocalDateTime p_regist_datetime;
+	@Column(name = "p_regist_datetime", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	Date p_regist_datetime;
 
 	@Column(name = "p_img")
 	String p_img;
@@ -26,16 +28,16 @@ public class Post {
 	@Column(name = "p_location")
 	String p_location;
 
-	@Column(name = "likes_cnt")
+	@Column(name = "likes_cnt", nullable = false)
 	int likes_cnt;
 
-	@Column(name = "coment_cnt")
+	@Column(name = "coment_cnt", nullable = false)
 	int coment_cnt;
 
-	@Column(name = "p_writer")
+	@Column(name = "p_writer", nullable = false)
 	String p_writer;
 
-	@Column(name = "p_content")
+	@Column(name = "p_content", nullable = false)
 	String p_content;
 
 	@JsonIgnore
