@@ -51,7 +51,7 @@
                     </div>
                     <div class="form__list__contents">
                         <aside class="form__list__title">
-                            <label for="newPwd">비밀번호 확인</label>
+                            <label for="cfmPwd">비밀번호 확인</label>
                         </aside>
                         <div class="form__list__input">
                             <input autocomplete="new-password" 
@@ -62,6 +62,8 @@
                                     spellcheck="true" 
                                     type="password" 
                                     v-model="cfmPwd">
+                            <div class="alert alert-success" id="alert-success" style="display:none">비밀번호가 일치합니다.</div> 
+                            <div class="alert alert-danger" id="alert-danger" style="display:none">비밀번호가 일치하지 않습니다.</div>
                         </div>
                     </div>
                     <div class="form__list__contents">
@@ -118,6 +120,9 @@ var qs = require('qs')
                     console.warn("ERROR : ", err)
                 })
             },
+            sameListener() {
+                
+            }
         }
     }
 </script>

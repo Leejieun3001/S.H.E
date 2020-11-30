@@ -1,5 +1,8 @@
 <template>
     <main class="contents" role="main">
+        <head>
+            <link rel="stylesheet" href="src\styles\jquery.toast.css">
+        </head>
         <div class="container">
             <ul class="title-list">
                 <li>
@@ -13,25 +16,20 @@
                 <div class="profile">
                     <div class="profile__image">
                         <div class="profile__image-btn">
-                            <button class="change" title="프로필 사진 바꾸기" @click="changePhoto">
+                            <button class="change" title="프로필 사진 바꾸기" @click="chooseFiles()">
                                 <img alt="프로필 사진 바꾸기" class="img_change" :src="u_img">
-                            </button>
-                            <div>
                                 <form enctype="multipart/form-data" method="POST" role="presentation">
-                                    <input accept="image/jpeg,image/png" class="img_input" type="file" @change="onFileSelected" :v-model="u_img">
+                                    <input id="fileUpload" accept="image/jpeg,image/png" class="img_input" type="file" @change="onFileSelected">
                                 </form>
-                            </div>
+                            </button>
                         </div>
                     </div>
                     <div class="profile__text">
                         <h1 class="profile__text__username" title="nickName">{{u_nickname}}</h1>
-                        <button class="profile__text__change" type="button">프로필 사진 바꾸기
-                            <div>
-                                <form enctype="multipart/form-data" method="POST" role="presentation">
-                                    <input accept="image/jpeg,image/png" class="img_input" type="file" @change="onFileSelected" :v-model="u_img">
-                                </form>
-                            </div>
-                        </button>
+                        <button class="profile__text__change" type="button" @click="chooseFiles()">프로필 사진 바꾸기</button>
+                            <form enctype="multipart/form-data" method="POST" role="presentation">
+                                <input id="fileUpload" accept="image/jpeg,image/png" class="img_input" type="file" @change="onFileSelected">
+                            </form>
                     </div>
                 </div>
                 <form class="form__list" method="POST">
@@ -40,7 +38,7 @@
                             <label for="name">이름</label>
                         </aside>
                         <div class="form__list__input">
-                            <input aria-required="false" ref='u_img' id="name" type="text" class="form__input" v-model="u_name">
+                            <input aria-required="false" ref='u_img' id="name" type="text" class="form__input" @change="onInputChanged" v-model="u_name">
                         </div>
                     </div>
                     <div class="form__list__contents">
@@ -48,7 +46,7 @@
                             <label for="userName">사용자 이름</label>
                         </aside>
                         <div class="form__list__input">
-                            <input aria-required="true" ref='u_img' id="userName" type="text" class="form__input" v-model="u_nickname">
+                            <input aria-required="true" ref='u_img' id="userName" type="text" class="form__input" @change="onInputChanged" v-model="u_nickname">
                         </div>
                     </div>
                     <div class="form__list__contents">
@@ -56,7 +54,7 @@
                             <label for="userBio">소개</label>
                         </aside>
                         <div class="form__list__input">
-                            <textarea class="form__textarea" id="userBio" v-model="u_bio"></textarea>
+                            <textarea class="form__textarea" id="userBio" @change="onInputChanged" v-model="u_bio"></textarea>
                         </div>
                     </div>
                     <div class="form__list__contents">
@@ -74,7 +72,7 @@
                             <label for="userEmail">이메일</label>
                         </aside>
                         <div class="form__list__input">
-                            <input aria-required="false" id="userEmail" type="text" class="form__input" v-model="u_email">
+                            <input aria-required="false" id="userEmail" type="text" class="form__input" @change="onInputChanged" v-model="u_email" >
                         </div>
                     </div>
                     <div class="form__list__contents">
@@ -82,7 +80,7 @@
                             <label for="userPhoneNumber">전화번호</label>
                         </aside>
                         <div class="form__list__input">
-                            <input aria-required="false" id="userPhoneNumber" type="text" class="form__input" v-model="u_phoneNum">
+                            <input aria-required="false" id="userPhoneNumber" type="text" class="form__input" @change="onInputChanged" v-model="u_phoneNum">
                         </div>
                     </div>
                     <div class="form__select__gender">
@@ -108,7 +106,7 @@
                                 <button class="submit__btn" 
                                         v-on:click="submitForm"
                                         type="button"
-                                        v-bind:disabled=1>제출
+                                        v-bind:disabled=this.changeBool>제출
                                 </button>
                             </div>
                         </div>
@@ -119,8 +117,10 @@
     </main>
 </template>
 
+<script src="src\js\jquery.toast.js"></script>
 <script>
-import userInfo from '../data/userInfo'
+import userInfo from '../data/userInfo';
+import 'jquery-toast-plugin';
 
     export default {
         name: "mypage",
@@ -135,7 +135,8 @@ import userInfo from '../data/userInfo'
                 u_bio: userInfo.userBio,
                 u_email: userInfo.email,
                 u_phoneNum: userInfo.phoneNumber,
-                gender: ''
+                gender: '',
+                changeBool: true,
             }
         },
         created() {
@@ -149,18 +150,59 @@ import userInfo from '../data/userInfo'
                 return this.gender = '중성'
             }
         },
+        
         methods: {
             submitForm() {
-                
+                const formData = new FormData();
+                formData.append('u_img', this.u_img);
+                formData.append('u_nickname', this.u_nickname);
+                formData.append('u_name', this.u_name);
+                formData.append('u_bio', this.u_bio);
+                formData.append('u_email', this.u_email);
+                formData.append('u_phoneNum', this.u_phoneNum);
+
+                for (let key of formData.entries())
+                {
+                    console.log('${key}');
+                }
+                // url, FormData, options 순으로 작성!
+                this.$http.post('http://localhost:3000/api/mypage/modify', formData, {
+                    headers: {
+                        'Content-Type' : 'multipart/form-data'
+                    }
+                }).then((res) => {
+                    console.log(res);
+                }).then((err) => {
+                    console.log(err);
+                });
             },
-            onFileSelected(event) { 
-                this.u_img = this.$refs.uploadImageFile.files[0]
+            chooseFiles() {
+                document.getElementById("fileUpload").click()
             },
-            async onSave(){ 
-                const fd = new FormData(); 
-                fd.append('u_img', this.u_img);
-                // image file upload
-                await axios.post('/api/data',fd); 
+            onFileSelected: function(event) { 
+                var input = event.target; 
+                if (input.files && input.files[0]) { 
+                    var reader = new FileReader(); 
+                    reader.onload = (e) => { 
+                        this.u_img = e.target.result; 
+                    }; 
+                    reader.readAsDataURL(input.files[0]);
+                    $.toast({
+                        textAlign: 'center',
+                        heading: 'Success',
+                        text : "이미지가 업로드 되었습니다.", 
+                        showHideTransition : 'slide',  // It can be plain, fade or slide
+                        bgColor : 'gray',              // Background color for toast
+                        textColor : '#fff',            // text color
+                        hideAfter : 3000,                // `fakse` to show one stack at a time count showing the number of toasts that can be shown at once
+                        textAlign : 'left',            // Alignment of text i.e. left, right, center
+                        position : 'top-center',
+                        icon: 'success'
+                    })
+                }
+            },
+            onInputChanged() {
+                this.changeBool = false;
             }
         }
     }
@@ -539,7 +581,7 @@ import userInfo from '../data/userInfo'
         position: relative;
         background-color: #3897f0;
         border: 1px solid transparent;
-        font-size: 15px;
+        font-size: 14px;
     }
 
     .submit__btn[disabled] {

@@ -7,15 +7,15 @@
                     <img src="src\assets\logo.png" alt="so._.mini logo" width="30px" height="30px"/>
                     <div class="column"></div>
                     <div class="logo">
-                        <h3>so._.mini</h3>
+                        <h3>SO._.MINI</h3>
                     </div>
                 </div>
               </a>
           </div>
           <div class="content2">
             <form action="#">
-                <input type="search" placeholder="Write text here...">
-                <a href="#"><img class="btn" src="src\assets\search.png" alt="search_btn" width="20px" height="20px"/>></a>
+                <input type="search" placeholder="검색">
+                <a href="./explore"><img class="btn" src="src\assets\search.png" alt="search_btn" width="20px" height="20px"/>></a>
             </form>
           </div>
           <div class="content3">
@@ -50,7 +50,7 @@
 <style scoped>
     .box {
         width: 100%;
-        height: 77px;
+        height: 65px;
         text-align: center;
         position: fixed; 
         border-bottom: 1px solid #b8b8b860;
@@ -69,10 +69,10 @@
         text-align: center;
         display: flex;
         flex-direction: row;
-        height: 77px;
+        height: 60px;
         justify-content: center;
         transition: top 0.2s ease-in-out;
-        padding: 26px 20px;
+        padding: 20px 14px;
         max-width: 1000px;
         min-width: 900px;   
     }
@@ -105,12 +105,13 @@
 
     h3 {
         color:darkslateblue;
-        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+        font-family:inherit;
+        font-size: 23px;
+        font-weight: 200;
     }
 
     .content2 {
         flex: 1 9999 0%;
-        padding: 7px;
         justify-content: center;
     }
 
@@ -177,53 +178,53 @@
 
     form {
         position: absolute;
-        width : 46px;
-        height : 46px;
+        width: 200px;
+        height : 36px;
         left: 50%;
         top: 50%;
         padding: 5px;
         transform: translate(-50%, -50%);
         border-radius: 50px;
-        border: 4px solid rgb(221, 221, 221);
+        border: 2px solid rgb(221, 221, 221);
         box-sizing: border-box;
         background: #fff;
-        transition: 1.0s;
+        cursor: pointer;
     }
 
     input {
+        display: block;
         position: absolute;
         top: 0;
         left: 0;
         border: 0;
         width: 100%;
-        height: 38px;
+        height: 32px;
         line-height: 75px;
         outline: 0;
-        display: none;
-        font-size: 16px;
+        font-size: 14px;
         border-radius: 25px;
         padding: 0 20px;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        text-align: center;
     }
 
     .btn{
         position: absolute;
         top: 0;
         right: 0;
-        width: 38px;
-        height: 38px;
+        width: 32px;
+        height: 32px;
         box-sizing: border-box;
         border-radius: 50%;
         text-align: center;
         font-size: 25px;
-        transition: 1.0;
         background: #000000;
-        padding: 10px;
+        padding: 5px;
+        border: 2px solid #000;
     }
 
     form:hover {
-        width: 250px;
-        cursor: pointer;
+        cursor:none;
     }
     form:hover input{
         display: block;

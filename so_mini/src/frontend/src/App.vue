@@ -9,11 +9,13 @@
 
 <script>
   import headers from "./components/HeaderContent";
+  import feed from "./components/feed";
   
   export default {
     name: 'app',
     components :  { 
       "HeaderContent" : headers,
+      "feed" : feed,
     },
     data() {
       return {
